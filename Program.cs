@@ -16,12 +16,18 @@
                 int flujo;
                 int opcion;
                 string respuesta = "si";
-                // creamos listas para alamacenar
+                // creamos listas para almacenar
                 List<string> historial = new List<string>();
                 List<int> flujosRegistrados = new List<int>();
 
+
+            // cuando el usuario salga del programa después de realizar sus registros
+            // los datos se mantendrán guardados en el archivo txt y al volver a ingresar 
+            // al programa se cargarán los datos anteriores para que el usuario pueda ver su historial complet
+            Funciones.CargarDatos(historial, flujosRegistrados);
+
             // mediante la estructura do-while (mostramos el menú para que al menos se ejecute una vez
-                do
+            do
                 {
                 // MENÚ INTERACTIVO
 
@@ -57,7 +63,7 @@
 
                         // un while para corroborar que el usuario no ingrese valores negativos
                         // y si es así pedirle que ingrese los datos de nuevo
-                        while (!int.TryParse(Console.ReadLine(), out flujo) || flujo < 0)
+                        while ( flujo < 0)
                         {
                             Console.WriteLine("¡Entrada inválida!. El flujo debe ser un número entero positivo.");
                             Console.WriteLine($"Ingrese nuevamente el flujo vehicular detectado en {Ovalo}: ");
@@ -78,7 +84,11 @@
                        string registro = $"{DateTime.Now.ToString("HH:mm:ss")} | {Ovalo}: {flujo} vehículos -> Tráfico {Ntrafico}, {tiempo}s";
                             historial.Add(registro);
                             flujosRegistrados.Add(flujo);
-                            break;
+
+                        // guardams los datos en el archivo txt para que se mantegan
+
+                        Funciones.GuardarDatos(historial);
+                        break;
 
                         case 3:
                         // llamamos a la función para mostrar los registros
@@ -121,7 +131,7 @@
                             // verificamos si hay datos para guardar
                             if (historial.Count > 0)
                             {
-                                File.WriteAllLines("Reporte_Trafico.txt", historial);
+                                File.WriteAllLines("Reporte_Tráfico.txt", historial);
                                 Console.WriteLine("¡Éxito! El archivo se ha guardado correctamente.");
                             }
                             // si no encuentra mostramos un mensaje
@@ -130,7 +140,10 @@
                                 Console.WriteLine("No hay registros en el historial para guardar.");
                             }
 
-                            Console.WriteLine("Saliendo del sistema...");
+                          Funciones.GuardarDatos(historial);
+                        Console.WriteLine("Saliendo del sistema...");
+                        Console.WriteLine("Presione cualquier tecla para salir.....");
+                        Console.ReadKey();
                             break;
 
                         default:
