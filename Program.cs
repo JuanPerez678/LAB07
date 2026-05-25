@@ -134,19 +134,16 @@
                             // verificamos si hay datos para guardar
                             if (historial.Count > 0)
                             {
-                                File.WriteAllLines("Reporte_Tráfico.txt", historial);
-                                Console.WriteLine("¡Éxito! El archivo se ha guardado correctamente.");
+                            // llamamos a la función para guardar los datos en el archivo txt
+                            Funciones.GuardarDatos(historial);
+                            Console.WriteLine("¡Éxito! El archivo se ha guardado correctamente.");
                             }
                             // si no encuentra mostramos un mensaje
                             else
                             {
                                 Console.WriteLine("No hay registros en el historial para guardar.");
                             }
-
-                          Funciones.GuardarDatos(historial);
-                        Console.WriteLine("Saliendo del sistema...");
-                        Console.WriteLine("Presione cualquier tecla para salir.....");
-                        Console.ReadKey();
+                       
                             break;
 
                         default:
