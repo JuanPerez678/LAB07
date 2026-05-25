@@ -11,8 +11,11 @@
         {
 
             static void Main(string[] args)
+
             {
-                string Ovalo;
+
+            //=============== SISTEMA DE ANÁLISIS VEHICULAR Y SINCRONIZACIÓN DE SEMÁFOROS ===============   
+            string Ovalo;
                 int flujo;
                 int opcion;
                 string respuesta = "si";
